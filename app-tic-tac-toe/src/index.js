@@ -1,14 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+/**
+ * Lines 1-5 brings all necessary pieces together
+ * React; React's library to talk to web browsers (React DOM); 
+ * the styles; the component created in App.js
+ */
+import React, { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+/**
+ * rest of the file brings all pieces together and injects the final product 
+ * into index.html in public folder.
+ */
+const root = createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
