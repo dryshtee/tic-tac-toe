@@ -48,17 +48,6 @@ code {
 ul {
   padding-left: 20px;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
-}
-
 /**
 * the .square selector defines the style of any component where the className is 
 */
