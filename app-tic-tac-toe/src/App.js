@@ -1,15 +1,33 @@
 import './App.css';
+import { useState } from 'react';
 
 /**
- * defines a function call Square
+ * passing data through props
+ * create a reusable component to avoid messy, duplicated code
+ * using React's component architecture
+ */
+function Square() {
+  const [value, setValue] = useState(null);
+
+  function handleClick() {
+    setValue('X');
+  }
+
+  return (
+    <button 
+      className="square" 
+      onClick={ handleClick }
+    >
+      { value }
+    </button>
+  );
+}
+
+/**
+ * defines a function call Board
  * export JavaScript keyword: make function accessible outside this file
  * default keyword tells other files using your code taht it's the main function    
  */
-
-function Square({ value }) {
-  return <button className="square">{ value }</button>;
-}
-
 export default function Board() {
   /**
  * returns (whatever comes after is returned as a value to the caller of the function) 
@@ -20,19 +38,19 @@ export default function Board() {
   return (
     <>
       <div className="board-row">
-        <Square value="1"/>
-        <Square value="2"/>
-        <Square value="3"/>
+        <Square/>
+        <Square/>
+        <Square/>
       </div>
       <div className="board-row">
-        <Square value="4"/>
-        <Square value="5"/>
-        <Square value="6"/>
+        <Square/>
+        <Square/>
+        <Square/>
       </div>
       <div className="board-row">
-        <Square value="7"/>
-        <Square value="8"/>
-        <Square value="9"/>
+        <Square/>
+        <Square/>
+        <Square/>
       </div>
     </>
   );
