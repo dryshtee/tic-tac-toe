@@ -15,14 +15,36 @@ function Square({ value, onSquareClick }) {
 /**
  * defines a function call Board
  * export JavaScript keyword: make function accessible outside this file
- * default keyword tells other files using your code taht it's the main function    
+ * default keyword tells other files using your code that it's the main function    
  */
 export default function Board() {
   const [xIsNext, setXIsNext] = useState(true);
   const [squares, setSquares] = useState(Array(9).fill(null));
+  /**
+   * helper function that checks for a winner
+   */
+  function  calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a,b, c] = lines[i];
+      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        return squares[a];
+      }
+    }
+    return null;
+  }
 
   function handleClick(i) {
-    if(squares[i]) {
+    if(squares[i] || calculateWinner(squares)) {
       return;
     }
     const nextSquares = squares.slice();
@@ -35,6 +57,17 @@ export default function Board() {
     setXIsNext(!xIsNext);
   }
 
+  /**
+   * declaring the winner
+   */
+  const winner = calculateWinner(squares);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
+
 /**
  * returns (whatever comes after is returned as a value to the caller of the function) 
  * a button (JSX element: combination of JS code + HTML tags)
@@ -44,6 +77,7 @@ export default function Board() {
 */
   return (
     <>
+    <div className="status">{ status }</div>
       <div className="board-row">
         <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
         <Square value={squares[1]} onSquareClick={() => handleClick(1)}/>
